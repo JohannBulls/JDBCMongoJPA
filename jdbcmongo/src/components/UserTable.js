@@ -4,14 +4,22 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import UserModal from './UserModal';
 import userService from '../services/userService';
 
+/**
+ * UserTable component that displays a list of registered users and provides
+ * functionality to add new users via a modal.
+ */
 function UserTable() {
     const [users, setUsers] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
 
+    // Fetch users when the component mounts
     useEffect(() => {
         fetchUsers();
     }, []);
 
+    /**
+     * Fetches the list of users from the backend and sets the users state.
+     */
     const fetchUsers = async () => {
         try {
             const data = await userService.getUsers();
@@ -21,7 +29,14 @@ function UserTable() {
         }
     };
 
+    /**
+     * Opens the user modal.
+     */
     const openModal = () => setModalOpen(true);
+
+    /**
+     * Closes the user modal.
+     */
     const closeModal = () => setModalOpen(false);
 
     return (

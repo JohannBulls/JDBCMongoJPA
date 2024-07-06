@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import userService from '../services/userService';
 
+/**
+ * UserModal component for adding a new user.
+ * 
+ * @param {function} fetchUsers - Function to fetch the updated list of users.
+ * @param {function} closeModal - Function to close the modal.
+ */
 function UserModal({ fetchUsers, closeModal }) {
     const [formData, setFormData] = useState({
         firstName: '',
@@ -10,6 +16,11 @@ function UserModal({ fetchUsers, closeModal }) {
         program: ''
     });
 
+    /**
+     * Handles changes to the form inputs.
+     * 
+     * @param {object} e - Event object from the input change event.
+     */
     const handleInputChange = (e) => {
         setFormData({
             ...formData,
@@ -17,16 +28,22 @@ function UserModal({ fetchUsers, closeModal }) {
         });
     };
 
+    /**
+     * Handles form submission.
+     * Validates the input and sends the form data to the backend.
+     */
     const handleSubmit = async () => {
+        // Validate form data
         if (!formData.firstName || !formData.lastName || !formData.birthdate || !formData.email || !formData.program) {
             alert('Please fill out all fields');
             return;
         }
         try {
             await userService.addUser(formData);
-            fetchUsers(); // Actualiza la lista de usuarios después de agregar uno nuevo
-            closeModal(); // Cierra el modal después de agregar el usuario
-            setFormData({ // Reinicia el estado del formulario después de enviar
+            fetchUsers(); // Update the user list after adding a new user
+            closeModal(); // Close the modal after adding the user
+            // Reset the form state after submission
+            setFormData({
                 firstName: '',
                 lastName: '',
                 birthdate: '',
@@ -48,7 +65,7 @@ function UserModal({ fetchUsers, closeModal }) {
                             <button type="button" className="btn-close" aria-label="Close" onClick={closeModal}></button>
                         </div>
                         <div className="modal-body">
-                            {/* Contenido del modal */}
+                            {/* Modal content */}
                             <form>
                                 <div className="mb-3">
                                     <label htmlFor="firstName" className="form-label">First Name</label>

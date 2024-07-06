@@ -6,48 +6,63 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.Date;
 
+/**
+ * Main application class for accessing MongoDB data using Spring Boot and MongoDB repositories.
+ */
 @SpringBootApplication
 public class AccessingDataMongodbApplication implements CommandLineRunner {
 
     @Autowired
     private RegisterUserRepository repository;
 
+    /**
+     * Main method to run the Spring Boot application.
+     * @param args Command-line arguments.
+     */
     public static void main(String[] args) {
         SpringApplication.run(AccessingDataMongodbApplication.class, args);
     }
 
+    /**
+     * Method to perform operations on MongoDB data upon application startup.
+     * @param args Command-line arguments.
+     * @throws Exception If an error occurs while running the application.
+     */
     @Override
     public void run(String... args) throws Exception {
 
+        // Clear all existing data
         repository.deleteAll();
 
-        // save a couple of customers
+        // Save a couple of users
         repository.save(new RegisterUser("Alice", "Smith", new Date(), "alice.smith@example.com", "Science"));
         repository.save(new RegisterUser("Bob", "Smith", new Date(), "bob.smith@example.com", "Science"));
 
-        // fetch all customers
-        System.out.println("Customers found with findAll():");
+        // Fetch all users
+        System.out.println("Users found with findAll():");
         System.out.println("-------------------------------");
-        for (RegisterUser customer : repository.findAll()) {
-            System.out.println(customer);
+        for (RegisterUser user : repository.findAll()) {
+            System.out.println(user);
         }
         System.out.println();
 
-        // fetch an individual customer
-        System.out.println("Customer found with findByFirstName('Alice'):");
+        // Fetch an individual user by first name
+        System.out.println("User found with findByFirstName('Alice'):");
         System.out.println("--------------------------------");
         System.out.println(repository.findByFirstName("Alice"));
 
-        System.out.println("Customers found with findByLastName('Smith'):");
+        // Fetch users by last name
+        System.out.println("Users found with findByLastName('Smith'):");
         System.out.println("--------------------------------");
-        for (RegisterUser customer : repository.findByLastName("Smith")) {
-            System.out.println(customer);
+        for (RegisterUser user : repository.findByLastName("Smith")) {
+            System.out.println(user);
         }
 
-        System.out.println("Customers found with findByProgram('Science'):");
+        // Fetch users by program
+        System.out.println("Users found with findByProgram('Science'):");
         System.out.println("--------------------------------");
-        for (RegisterUser customer : repository.findByProgram("Science")) {
-            System.out.println(customer);
+        for (RegisterUser user : repository.findByProgram("Science")) {
+            System.out.println(user);
         }
     }
 }
