@@ -67,6 +67,16 @@ The frontend application is built using React and provides a user interface for 
 - Node.js and npm
 - MongoDB
 
+### Start MongoDB
+
+If you already have MongoDB installed locally, make sure to start it before running the Spring Boot application. You can start MongoDB by running the `mongod` command in your terminal:
+
+```bash
+mongod
+```
+
+This ensures that the database is active and ready to accept connections from the Spring Boot application.
+
 ### Backend Setup
 
 1. **Clone the Repository**:
@@ -82,7 +92,7 @@ The frontend application is built using React and provides a user interface for 
    mvn clean install
    mvn java -jar target/JDBCMongoJPA-0.0.1-SNAPSHOT.jar
    ```
-
+![alt text](images/image2.png)
 ### Frontend Setup
 
 1. **Navigate to Frontend Directory**:
@@ -106,7 +116,7 @@ The frontend application is built using React and provides a user interface for 
 4. **Access the Application**:
    - Open your browser and go to `http://localhost:3000`
 
-
+![alt text](images/image.png)
 ## Technologies Used
 
 - **Backend**: Spring Boot, Java, MongoDB
