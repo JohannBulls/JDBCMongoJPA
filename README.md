@@ -1,70 +1,122 @@
-# Getting Started with Create React App
+# User Registration Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application allows users to register with their details, which are then stored in MongoDB. It includes both a backend built with Spring Boot and a frontend developed with React. The frontend enables users to view the list of registered users and add new users through a modal form.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **User Registration**: Allows adding new users with fields for first name, last name, birthdate, email, and program.
+- **Data Storage**: Stores user data in a MongoDB database.
+- **API Integration**: Provides RESTful APIs for managing user data.
+- **Responsive UI**: Uses Bootstrap for a responsive and user-friendly interface.
 
-### `npm start`
+## Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Backend (Spring Boot)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The backend server is built using Spring Boot and provides RESTful APIs for managing user data.
 
-### `npm test`
+#### Main Components
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **AccessingDataMongodbApplication.java**:
+   - The main class for bootstrapping the Spring Boot application.
+   - Implements `CommandLineRunner` to initialize data.
 
-### `npm run build`
+2. **RegisterUser.java**:
+   - A model class that represents a user.
+   - Annotated with `@Document` to map to the MongoDB collection.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **RegisterUserRepository.java**:
+   - A repository interface extending `MongoRepository` for CRUD operations.
+   - Includes custom query methods.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. **UserController.java**:
+   - REST controller that handles incoming requests for managing user data.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. **WebConfig.java**:
+   - Configuration class to enable CORS for the frontend.
 
-### `npm run eject`
+6. **application.properties**:
+   - Configuration file for MongoDB connection.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Frontend (React)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The frontend application is built using React and provides a user interface for viewing and adding users.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Main Components
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. **App.js**:
+   - The main component that renders the `UserTable` component.
 
-## Learn More
+2. **UserTable.js**:
+   - Displays a list of registered users in a table.
+   - Includes a button to open the modal for adding a new user.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. **UserModal.js**:
+   - A modal form for adding new users.
+   - Handles form input and submission.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+4. **userService.js**:
+   - Service module for making API calls to the backend.
 
-### Code Splitting
+## Installation and Setup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Prerequisites
 
-### Analyzing the Bundle Size
+- Java Development Kit (JDK) 8 or higher
+- Apache Maven
+- Node.js and npm
+- MongoDB
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Backend Setup
 
-### Making a Progressive Web App
+1. **Clone the Repository**:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+   ```bash
+   git clone https://github.com/JohannBulls/JDBCMongoJPA
+   cd JDBCMongoJPA
+   ```
 
-### Advanced Configuration
+2. **Compile and Run the Backend**:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+   ```bash
+   mvn clean install
+   mvn java -jar target/JDBCMongoJPA-0.0.1-SNAPSHOT.jar
+   ```
 
-### Deployment
+### Frontend Setup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. **Navigate to Frontend Directory**:
 
-### `npm run build` fails to minify
+   ```bash
+   cd jdbcmongo
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. **Install Dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the Frontend**:
+
+   ```bash
+   npm start
+   ```
+
+4. **Access the Application**:
+   - Open your browser and go to `http://localhost:3000`
+
+
+## Technologies Used
+
+- **Backend**: Spring Boot, Java, MongoDB
+- **Frontend**: React, Bootstrap
+- **API**: RESTful API
+
+## Author
+
+- Johann Amaya Lopez - [GitHub](https://github.com/JohannBulls)
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE.txt) file for details.
